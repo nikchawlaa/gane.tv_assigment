@@ -1,0 +1,2016 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Game",
+    "contact": {}
+  },
+  "host": "example.com",
+  "basePath": "/",
+  "securityDefinitions": {
+    "Api-Key": {
+      "type": "apiKey",
+      "description": "",
+      "name": "X-Api-Key",
+      "in": "header"
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/tournaments": {
+      "post": {
+        "description": "Creates a new tournament.",
+        "summary": "Create a new tournament as the organizer.",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Createanewtournamentastheorganizer.",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Api-Key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Createanewtournamentastheorganizer.Request"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Tournamentcreated."
+            },
+            "examples": {
+              "application/json": {
+                "name": "My Weekly Tournament",
+                "full_name": "My Weekly Tournament - Long title",
+                "scheduled_date_start": "2015-09-06",
+                "scheduled_date_end": "2015-09-07",
+                "timezone": "America/Sao_Paulo",
+                "public": true,
+                "size": 16,
+                "online": true,
+                "location": "London",
+                "country": "GB",
+                "logo": {
+                  "logo_small": "https://www.toornament.com/media/file/123456/logo_small",
+                  "logo_medium": "https://www.toornament.com/media/file/123456/logo_medium",
+                  "logo_large": "https://www.toornament.com/media/file/123456/logo_large",
+                  "original": "https://www.toornament.com/media/file/123456/original"
+                },
+                "registration_enabled": true,
+                "registration_opening_datetime": "1999-01-01T00:00:00+00:00",
+                "registration_closing_datetime": "1999-01-01T00:00:00+00:00",
+                "organization": "Avery Bullock",
+                "contact": "contact@toornament.com",
+                "discord": "https://discord.gg/qWbbkuY",
+                "website": "http://www.toornament.com",
+                "description": "My description \n on multiple lines",
+                "rules": "My rules \n on multiple lines",
+                "prize": "1 - 10,000$ \n 2 - 5,000$",
+                "match_report_enabled": false,
+                "registration_request_message": "For more info, go there -> []",
+                "check_in_enabled": true,
+                "check_in_participant_enabled": true,
+                "check_in_participant_start_datetime": "1999-01-01T00:00:00+00:00",
+                "check_in_participant_end_datetime": "1999-01-01T00:00:00+00:00",
+                "archived": false,
+                "registration_acceptance_message": "You must now follow the next steps -> []",
+                "registration_refusal_message": "Sorry, your registration has been refused.",
+                "registration_terms_enabled": true,
+                "registration_terms_url": "http://download.my/terms.pdf",
+                "id": "378426939508809728",
+                "discipline": "my_discipline",
+                "status": "running",
+                "participant_type": "single",
+                "platforms": [
+                  "pc"
+                ],
+                "featured": true,
+                "registration_notification_enabled": true
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      },
+      "get": {
+        "description": "Returns tournaments you organize with all organizer-specific data.",
+        "summary": "Retrieve the tournaments you organize and have organized.",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Retrievethetournamentsyouorganizeandhaveorganized.",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "disciplines",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "One or several disciplines to filter."
+          },
+          {
+            "name": "statuses",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "One or several tournament statuses to filter."
+          },
+          {
+            "name": "scheduled_before",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "An ISO 8601 date (only the date part, with YYYY-MM-DD pattern) to include all tournaments scheduled to take place before or at the date."
+          },
+          {
+            "name": "scheduled_after",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "An ISO 8601 date (only the date part, with YYYY-MM-DD pattern) to include all tournaments scheduled to take place after or at the date."
+          },
+          {
+            "name": "countries",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "One or several countries to filter, with format ISO 3166-1 alpha-2 country codes."
+          },
+          {
+            "name": "platforms",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "One or several platforms to filter."
+          },
+          {
+            "name": "is_online",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Whether the tournament is played online."
+          },
+          {
+            "name": "archived",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Whether to include archived tournaments."
+          },
+          {
+            "name": "custom_user_identifier",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "An external custom user identifier. Use the format that suits your needs."
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Sorts the collection in a particular order. \"scheduled_asc\" sorts the tournaments by scheduled date from the oldest to the most recent one; \"scheduled_desc\" sorts the tournaments by scheduled date from the most recent to the oldest one."
+          },
+          {
+            "name": "X-Api-Key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "(Required) A range of requested items using the 'tournaments' unit. The size of the range can not exceed 50. (see [Pagination](https://developer.toornament.com/v2/overview/pagination))"
+          }
+        ],
+        "responses": {
+          "206": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Tournamentsretrieved."
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "name": "My Weekly Tournament",
+                  "full_name": "My Weekly Tournament - Long title",
+                  "scheduled_date_start": "2015-09-06",
+                  "scheduled_date_end": "2015-09-07",
+                  "timezone": "America/Sao_Paulo",
+                  "public": true,
+                  "size": 16,
+                  "online": true,
+                  "location": "London",
+                  "country": "GB",
+                  "logo": {
+                    "logo_small": "https://www.toornament.com/media/file/123456/logo_small",
+                    "logo_medium": "https://www.toornament.com/media/file/123456/logo_medium",
+                    "logo_large": "https://www.toornament.com/media/file/123456/logo_large",
+                    "original": "https://www.toornament.com/media/file/123456/original"
+                  },
+                  "registration_enabled": true,
+                  "registration_opening_datetime": "1999-01-01T00:00:00+00:00",
+                  "registration_closing_datetime": "1999-01-01T00:00:00+00:00",
+                  "id": "378426939508809728",
+                  "discipline": "my_discipline",
+                  "status": "running",
+                  "platforms": [
+                    "pc"
+                  ]
+                },
+                {
+                  "name": "My Weekly Tournament",
+                  "full_name": "My Weekly Tournament - Long title",
+                  "scheduled_date_start": "2015-09-06",
+                  "scheduled_date_end": "2015-09-07",
+                  "timezone": "America/Sao_Paulo",
+                  "public": true,
+                  "size": 16,
+                  "online": true,
+                  "location": "London",
+                  "country": "GB",
+                  "logo": {
+                    "logo_small": "https://www.toornament.com/media/file/123456/logo_small",
+                    "logo_medium": "https://www.toornament.com/media/file/123456/logo_medium",
+                    "logo_large": "https://www.toornament.com/media/file/123456/logo_large",
+                    "original": "https://www.toornament.com/media/file/123456/original"
+                  },
+                  "registration_enabled": true,
+                  "registration_opening_datetime": "1999-01-01T00:00:00+00:00",
+                  "registration_closing_datetime": "1999-01-01T00:00:00+00:00",
+                  "id": "378426939508809728",
+                  "discipline": "my_discipline",
+                  "status": "running",
+                  "platforms": [
+                    "pc"
+                  ]
+                }
+              ]
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/me/registrations": {
+      "post": {
+        "description": "Creates a new registration for the user associated to the access token. The participant type of the tournament defines whether it expects a player or a team in the request body. If the registrations are disabled or closed, the endpoint will return a 403 (Access Denied).",
+        "summary": "Create a new registration for the authenticated user.",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Createanewregistrationfortheauthenticateduser.",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Api-Key",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Createanewregistrationfortheauthenticateduser.Request"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Registrationscreated."
+            },
+            "examples": {
+              "application/json": {
+                "name": "A team player name",
+                "tournament_id": "378426939508809728",
+                "custom_fields": "et",
+                "id": "375143143408309123",
+                "type": "team",
+                "participant_id": "375143143408309123",
+                "status": "pending"
+              }
+            },
+            "headers": {}
+          }
+        },
+        "security": []
+      }
+    },
+    "/tournaments/{tournament_id}/stages": {
+      "get": {
+        "description": "Returns all stages of a tournament with basic information and settings.",
+        "summary": "Retrieve all stages of a tournament.",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Retrieveallstagesofatournament.",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tournament_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "(Required) The id of the tournament you want to retrieve data about."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Stagesretrieved"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "id": "618983668512789184",
+                  "number": 2,
+                  "name": "Playoffs",
+                  "type": "double_elimination",
+                  "closed": false,
+                  "settings": {
+                    "size": 16,
+                    "grand_final": "simple",
+                    "threshold": 0,
+                    "skip_round1": false
+                  }
+                },
+                {
+                  "id": "618983668512789184",
+                  "number": 2,
+                  "name": "Playoffs",
+                  "type": "double_elimination",
+                  "closed": false,
+                  "settings": {
+                    "size": 16,
+                    "grand_final": "simple",
+                    "threshold": 0,
+                    "skip_round1": false
+                  }
+                }
+              ]
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/tournaments/{tournament_id}/stages/{stage_id}/bracket-nodes": {
+      "get": {
+        "description": "Returns the bracket nodes of a stage. A bracket node represents a match and some extra data.",
+        "summary": "Retrieve bracket nodes of a stage and tournament.",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Retrievebracketnodesofastageandtournament.",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "group_ids",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "A list of group ids to filter."
+          },
+          {
+            "name": "group_numbers",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "A list of group numbers to filter."
+          },
+          {
+            "name": "round_ids",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "A list of round ids to filter."
+          },
+          {
+            "name": "round_numbers",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "A list of round numbers to filter."
+          },
+          {
+            "name": "min_depth",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "A minimum depth to filter."
+          },
+          {
+            "name": "max_depth",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "A maximal depth to filter."
+          },
+          {
+            "name": "tournament_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "(Required) The id of the tournament you want to retrieve data about."
+          },
+          {
+            "name": "stage_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "(Required) The id of the stage you want to retrieve data about."
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "(Required) A range of requested items using the 'nodes' unit. The size of the range can not exceed 128. (see [Pagination](https://developer.toornament.com/v2/overview/pagination))"
+          }
+        ],
+        "responses": {
+          "206": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Bracketnodesretrieved."
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "id": "618954615761465416",
+                  "stage_id": "618983668512789184",
+                  "group_id": "618985165765456465",
+                  "round_id": "618965146546456651",
+                  "number": 2,
+                  "type": "duel",
+                  "status": "pending",
+                  "scheduled_datetime": "2015-12-31T00:00:00+00:00",
+                  "played_at": "2015-12-31T00:00:00+00:00",
+                  "depth": 2,
+                  "branch": "lb",
+                  "opponents": [
+                    {
+                      "number": 1,
+                      "result": "win",
+                      "rank": 3,
+                      "forfeit": false,
+                      "score": 15,
+                      "source_type": "winner",
+                      "source_node_id": "618946514654565656",
+                      "participant": {
+                        "id": "375143143408309123",
+                        "name": "Northmen",
+                        "custom_fields": {}
+                      }
+                    },
+                    {
+                      "number": 1,
+                      "result": "win",
+                      "rank": 3,
+                      "forfeit": false,
+                      "score": 15,
+                      "source_type": "winner",
+                      "source_node_id": "618946514654565656",
+                      "participant": {
+                        "id": "375143143408309123",
+                        "name": "Northmen",
+                        "custom_fields": {}
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "618954615761465416",
+                  "stage_id": "618983668512789184",
+                  "group_id": "618985165765456465",
+                  "round_id": "618965146546456651",
+                  "number": 2,
+                  "type": "duel",
+                  "status": "pending",
+                  "scheduled_datetime": "2015-12-31T00:00:00+00:00",
+                  "played_at": "2015-12-31T00:00:00+00:00",
+                  "depth": 2,
+                  "branch": "lb",
+                  "opponents": [
+                    {
+                      "number": 1,
+                      "result": "win",
+                      "rank": 3,
+                      "forfeit": false,
+                      "score": 15,
+                      "source_type": "winner",
+                      "source_node_id": "618946514654565656",
+                      "participant": {
+                        "id": "375143143408309123",
+                        "name": "Northmen",
+                        "custom_fields": {}
+                      }
+                    },
+                    {
+                      "number": 1,
+                      "result": "win",
+                      "rank": 3,
+                      "forfeit": false,
+                      "score": 15,
+                      "source_type": "winner",
+                      "source_node_id": "618946514654565656",
+                      "participant": {
+                        "id": "375143143408309123",
+                        "name": "Northmen",
+                        "custom_fields": {}
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/tournaments/{tournament_id}/participants": {
+      "get": {
+        "description": "Returns the participants of the given tournament. The data provided in the participant depends on whether the participant type is team or player. This setting can be found in the tournament.",
+        "summary": "Retrieve the participants of a tournament.",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Retrievetheparticipantsofatournament.",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The string to be looked for in the name of the participant."
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "A method to sort the filtered data. “created_asc” and “created_desc” sort the participants from their creation date (earliest to latest, and inversely). “Alphabetic” sorts the participants using their case-insensitive names."
+          },
+          {
+            "name": "tournament_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "(Required) The id of the tournament the participants are from."
+          },
+          {
+            "name": "Range",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "(Required) A range of requested items using the 'participants' unit. The size of the range can not exceed 50. (see [Pagination](https://developer.toornament.com/v2/overview/pagination))"
+          }
+        ],
+        "responses": {
+          "206": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Participantsretrieved."
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "id": "375143143408309123",
+                  "name": "Northmen",
+                  "custom_fields": {}
+                },
+                {
+                  "id": "375143143408309123",
+                  "name": "Northmen",
+                  "custom_fields": {}
+                }
+              ]
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/tournaments/{tournament_id}/matches/{match_id}/reports": {
+      "post": {
+        "description": "Create a new match report in a match, there can only be one report per participant.Match reports are only available for \"duel\" type matches. Trying to POST a new report in a \"ffa\" type match will result in a 403 Error.\n",
+        "summary": "Create a new match report in a match.",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Createanewmatchreportinamatch.",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tournament_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "(Required) The id of the tournament to retrieve."
+          },
+          {
+            "name": "match_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "(Required) The id of the match."
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Createanewmatchreportinamatch.Request"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Success"
+            },
+            "examples": {
+              "application/json": {
+                "closed": false,
+                "closed_at": "2015-12-31T00:00:00+00:00",
+                "closed_author_id": "513743143408302391",
+                "custom_user_identifier": "acme:account:1234",
+                "id": "168954615761461654",
+                "note": "A note on\ntwo lines\n",
+                "participant_id": "375143143408309123",
+                "report": {
+                  "opponents": [
+                    {
+                      "value": "<Error: Too many levels of nesting to fake this schema>"
+                    },
+                    {
+                      "value": "<Error: Too many levels of nesting to fake this schema>"
+                    }
+                  ]
+                },
+                "type": "report",
+                "user_id": "513743143408302391"
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/tournaments/{tournament_id}/participants/{id}": {
+      "get": {
+        "description": "Returns a participant identified with the given id. The data provided in the participant depends on whether the participant type is team or player. This setting can be found in the tournament.",
+        "summary": "Retrieve a single participant of a tournament.",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Retrieveasingleparticipantofatournament.",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tournament_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "(Required) The id of the tournament the participants are from."
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "(Required) The id of the participant to retrieve."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Participantretrieved."
+            },
+            "examples": {
+              "application/json": {
+                "id": "375143143408309123",
+                "name": "Northmen",
+                "custom_fields": {}
+              }
+            },
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/tournaments/{tournamentId}/close": {
+      "post": {
+        "summary": "Close tournament",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Closetournament",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tournamentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/prizes/claim": {
+      "post": {
+        "summary": "Claim prize",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Claimprize",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ClaimprizeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "headers": {}
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Createanewtournamentastheorganizer.Request": {
+      "title": "Createanewtournamentastheorganizer.Request",
+      "example": {
+        "countryCodes": [
+          "US",
+          "CA"
+        ],
+        "dateEnd": 1515119589135,
+        "dateStart": 1515105189135,
+        "description": "Tournament description",
+        "entryRequirements": [
+          [
+            "99208d38-cac9-45fe-8bfd-954ff7e3ae11"
+          ],
+          [
+            "35831019-b1d7-461a-9af9-22aa4abff68f",
+            "8e37e627-25de-42cf-83df-4bae958d33de"
+          ]
+        ],
+        "visibilityRequirements": [
+          [
+            "99208d38-cac9-45fe-8bfd-954ff7e3ae11"
+          ],
+          [
+            "35831019-b1d7-461a-9af9-22aa4abff68f",
+            "8e37e627-25de-42cf-83df-4bae958d33de"
+          ]
+        ],
+        "generateAccessKey": true,
+        "imageUrl": "https://amazon.com/image.png",
+        "leaderboardStat": "kills",
+        "matchesMax": 1,
+        "matchesPerPlayer": 1,
+        "metadata": "{\"stage\": 5, \"difficulty\": 9}",
+        "playerAttemptsPerMatch": 100,
+        "playersPerMatch": 500,
+        "prizeBundles": [
+          {
+            "prizeIds": [
+              "0031dc56-43e5-440f-9e05-ca747c28150e",
+              "a6c0bc2a-d04f-449b-aa11-326072610592"
+            ],
+            "rankFrom": 1,
+            "rankTo": 3,
+            "title": "Prize Title",
+            "description": "Prize Description",
+            "imageUrl": "https://s3.amazonaws.com/tournament-prizes/Prize-Item-1.png"
+          },
+          {
+            "prizeIds": [
+              "a6c0bc2a-d04f-449b-aa11-326072610592"
+            ],
+            "rankFrom": 4,
+            "rankTo": 10,
+            "title": "Prize Title #2",
+            "description": "Prize Description #2",
+            "imageUrl": "https://s3.amazonaws.com/tournament-prizes/Prize-Item-2.png"
+          }
+        ],
+        "scoreType": "INDIVIDUAL",
+        "subtitle": "Tournament Subtitle",
+        "title": "Tournament Title",
+        "winType": "HIGHEST",
+        "releaseType": "MANUAL"
+      },
+      "type": "object",
+      "properties": {
+        "countryCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dateEnd": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "dateStart": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "description": {
+          "type": "string"
+        },
+        "entryRequirements": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "visibilityRequirements": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "generateAccessKey": {
+          "type": "boolean"
+        },
+        "imageUrl": {
+          "type": "string"
+        },
+        "leaderboardStat": {
+          "type": "string"
+        },
+        "matchesMax": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "matchesPerPlayer": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "metadata": {
+          "type": "string"
+        },
+        "playerAttemptsPerMatch": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "playersPerMatch": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "prizeBundles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrizeBundle"
+          }
+        },
+        "scoreType": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "winType": {
+          "type": "string"
+        },
+        "releaseType": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "countryCodes",
+        "dateEnd",
+        "dateStart",
+        "description",
+        "entryRequirements",
+        "visibilityRequirements",
+        "generateAccessKey",
+        "imageUrl",
+        "leaderboardStat",
+        "matchesMax",
+        "matchesPerPlayer",
+        "metadata",
+        "playerAttemptsPerMatch",
+        "playersPerMatch",
+        "prizeBundles",
+        "scoreType",
+        "subtitle",
+        "title",
+        "winType",
+        "releaseType"
+      ]
+    },
+    "PrizeBundle": {
+      "title": "PrizeBundle",
+      "example": {
+        "prizeIds": [
+          "0031dc56-43e5-440f-9e05-ca747c28150e",
+          "a6c0bc2a-d04f-449b-aa11-326072610592"
+        ],
+        "rankFrom": 1,
+        "rankTo": 3,
+        "title": "Prize Title",
+        "description": "Prize Description",
+        "imageUrl": "https://s3.amazonaws.com/tournament-prizes/Prize-Item-1.png"
+      },
+      "type": "object",
+      "properties": {
+        "prizeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rankFrom": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rankTo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "imageUrl": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "prizeIds",
+        "rankFrom",
+        "rankTo",
+        "title",
+        "description",
+        "imageUrl"
+      ]
+    },
+    "Tournamentcreated.": {
+      "title": "Tournamentcreated.",
+      "example": {
+        "name": "My Weekly Tournament",
+        "full_name": "My Weekly Tournament - Long title",
+        "scheduled_date_start": "2015-09-06",
+        "scheduled_date_end": "2015-09-07",
+        "timezone": "America/Sao_Paulo",
+        "public": true,
+        "size": 16,
+        "online": true,
+        "location": "London",
+        "country": "GB",
+        "logo": {
+          "logo_small": "https://www.toornament.com/media/file/123456/logo_small",
+          "logo_medium": "https://www.toornament.com/media/file/123456/logo_medium",
+          "logo_large": "https://www.toornament.com/media/file/123456/logo_large",
+          "original": "https://www.toornament.com/media/file/123456/original"
+        },
+        "registration_enabled": true,
+        "registration_opening_datetime": "1999-01-01T00:00:00+00:00",
+        "registration_closing_datetime": "1999-01-01T00:00:00+00:00",
+        "organization": "Avery Bullock",
+        "contact": "contact@toornament.com",
+        "discord": "https://discord.gg/qWbbkuY",
+        "website": "http://www.toornament.com",
+        "description": "My description \n on multiple lines",
+        "rules": "My rules \n on multiple lines",
+        "prize": "1 - 10,000$ \n 2 - 5,000$",
+        "match_report_enabled": false,
+        "registration_request_message": "For more info, go there -> []",
+        "check_in_enabled": true,
+        "check_in_participant_enabled": true,
+        "check_in_participant_start_datetime": "1999-01-01T00:00:00+00:00",
+        "check_in_participant_end_datetime": "1999-01-01T00:00:00+00:00",
+        "archived": false,
+        "registration_acceptance_message": "You must now follow the next steps -> []",
+        "registration_refusal_message": "Sorry, your registration has been refused.",
+        "registration_terms_enabled": true,
+        "registration_terms_url": "http://download.my/terms.pdf",
+        "id": "378426939508809728",
+        "discipline": "my_discipline",
+        "status": "running",
+        "participant_type": "single",
+        "platforms": [
+          "pc"
+        ],
+        "featured": true,
+        "registration_notification_enabled": true
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "scheduled_date_start": {
+          "type": "string"
+        },
+        "scheduled_date_end": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "public": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "online": {
+          "type": "boolean"
+        },
+        "location": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "logo": {
+          "$ref": "#/definitions/Logo"
+        },
+        "registration_enabled": {
+          "type": "boolean"
+        },
+        "registration_opening_datetime": {
+          "type": "string"
+        },
+        "registration_closing_datetime": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "contact": {
+          "type": "string"
+        },
+        "discord": {
+          "type": "string"
+        },
+        "website": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "string"
+        },
+        "prize": {
+          "type": "string"
+        },
+        "match_report_enabled": {
+          "type": "boolean"
+        },
+        "registration_request_message": {
+          "type": "string"
+        },
+        "check_in_enabled": {
+          "type": "boolean"
+        },
+        "check_in_participant_enabled": {
+          "type": "boolean"
+        },
+        "check_in_participant_start_datetime": {
+          "type": "string"
+        },
+        "check_in_participant_end_datetime": {
+          "type": "string"
+        },
+        "archived": {
+          "type": "boolean"
+        },
+        "registration_acceptance_message": {
+          "type": "string"
+        },
+        "registration_refusal_message": {
+          "type": "string"
+        },
+        "registration_terms_enabled": {
+          "type": "boolean"
+        },
+        "registration_terms_url": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "discipline": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "participant_type": {
+          "type": "string"
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "featured": {
+          "type": "boolean"
+        },
+        "registration_notification_enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name",
+        "full_name",
+        "scheduled_date_start",
+        "scheduled_date_end",
+        "timezone",
+        "public",
+        "size",
+        "online",
+        "location",
+        "country",
+        "logo",
+        "registration_enabled",
+        "registration_opening_datetime",
+        "registration_closing_datetime",
+        "organization",
+        "contact",
+        "discord",
+        "website",
+        "description",
+        "rules",
+        "prize",
+        "match_report_enabled",
+        "registration_request_message",
+        "check_in_enabled",
+        "check_in_participant_enabled",
+        "check_in_participant_start_datetime",
+        "check_in_participant_end_datetime",
+        "archived",
+        "registration_acceptance_message",
+        "registration_refusal_message",
+        "registration_terms_enabled",
+        "registration_terms_url",
+        "id",
+        "discipline",
+        "status",
+        "participant_type",
+        "platforms",
+        "featured",
+        "registration_notification_enabled"
+      ]
+    },
+    "Logo": {
+      "title": "Logo",
+      "example": {
+        "logo_small": "https://www.toornament.com/media/file/123456/logo_small",
+        "logo_medium": "https://www.toornament.com/media/file/123456/logo_medium",
+        "logo_large": "https://www.toornament.com/media/file/123456/logo_large",
+        "original": "https://www.toornament.com/media/file/123456/original"
+      },
+      "type": "object",
+      "properties": {
+        "logo_small": {
+          "type": "string"
+        },
+        "logo_medium": {
+          "type": "string"
+        },
+        "logo_large": {
+          "type": "string"
+        },
+        "original": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "logo_small",
+        "logo_medium",
+        "logo_large",
+        "original"
+      ]
+    },
+    "Tournamentsretrieved.": {
+      "title": "Tournamentsretrieved.",
+      "example": {
+        "name": "My Weekly Tournament",
+        "full_name": "My Weekly Tournament - Long title",
+        "scheduled_date_start": "2015-09-06",
+        "scheduled_date_end": "2015-09-07",
+        "timezone": "America/Sao_Paulo",
+        "public": true,
+        "size": 16,
+        "online": true,
+        "location": "London",
+        "country": "GB",
+        "logo": {
+          "logo_small": "https://www.toornament.com/media/file/123456/logo_small",
+          "logo_medium": "https://www.toornament.com/media/file/123456/logo_medium",
+          "logo_large": "https://www.toornament.com/media/file/123456/logo_large",
+          "original": "https://www.toornament.com/media/file/123456/original"
+        },
+        "registration_enabled": true,
+        "registration_opening_datetime": "1999-01-01T00:00:00+00:00",
+        "registration_closing_datetime": "1999-01-01T00:00:00+00:00",
+        "id": "378426939508809728",
+        "discipline": "my_discipline",
+        "status": "running",
+        "platforms": [
+          "pc"
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "full_name": {
+          "type": "string"
+        },
+        "scheduled_date_start": {
+          "type": "string"
+        },
+        "scheduled_date_end": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "public": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "online": {
+          "type": "boolean"
+        },
+        "location": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "logo": {
+          "$ref": "#/definitions/Logo"
+        },
+        "registration_enabled": {
+          "type": "boolean"
+        },
+        "registration_opening_datetime": {
+          "type": "string"
+        },
+        "registration_closing_datetime": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "discipline": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "platforms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "full_name",
+        "scheduled_date_start",
+        "scheduled_date_end",
+        "timezone",
+        "public",
+        "size",
+        "online",
+        "location",
+        "country",
+        "logo",
+        "registration_enabled",
+        "registration_opening_datetime",
+        "registration_closing_datetime",
+        "id",
+        "discipline",
+        "status",
+        "platforms"
+      ]
+    },
+    "Createanewregistrationfortheauthenticateduser.Request": {
+      "title": "Createanewregistrationfortheauthenticateduser.Request",
+      "example": {
+        "name": "no",
+        "tournament_id": "elit",
+        "custom_fields": "deserunt adipisicing qui veniam",
+        "type": "<string>"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "tournament_id": {
+          "type": "string"
+        },
+        "custom_fields": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "tournament_id",
+        "custom_fields",
+        "type"
+      ]
+    },
+    "Registrationscreated.": {
+      "title": "Registrationscreated.",
+      "example": {
+        "name": "A team player name",
+        "tournament_id": "378426939508809728",
+        "custom_fields": "et",
+        "id": "375143143408309123",
+        "type": "team",
+        "participant_id": "375143143408309123",
+        "status": "pending"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "tournament_id": {
+          "type": "string"
+        },
+        "custom_fields": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "participant_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "tournament_id",
+        "custom_fields",
+        "id",
+        "type",
+        "participant_id",
+        "status"
+      ]
+    },
+    "Stagesretrieved": {
+      "title": "Stagesretrieved",
+      "example": {
+        "id": "618983668512789184",
+        "number": 2,
+        "name": "Playoffs",
+        "type": "double_elimination",
+        "closed": false,
+        "settings": {
+          "size": 16,
+          "grand_final": "simple",
+          "threshold": 0,
+          "skip_round1": false
+        }
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "closed": {
+          "type": "boolean"
+        },
+        "settings": {
+          "$ref": "#/definitions/Settings"
+        }
+      },
+      "required": [
+        "id",
+        "number",
+        "name",
+        "type",
+        "closed",
+        "settings"
+      ]
+    },
+    "Settings": {
+      "title": "Settings",
+      "example": {
+        "size": 16,
+        "grand_final": "simple",
+        "threshold": 0,
+        "skip_round1": false
+      },
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "grand_final": {
+          "type": "string"
+        },
+        "threshold": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "skip_round1": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "size",
+        "grand_final",
+        "threshold",
+        "skip_round1"
+      ]
+    },
+    "Bracketnodesretrieved.": {
+      "title": "Bracketnodesretrieved.",
+      "example": {
+        "id": "618954615761465416",
+        "stage_id": "618983668512789184",
+        "group_id": "618985165765456465",
+        "round_id": "618965146546456651",
+        "number": 2,
+        "type": "duel",
+        "status": "pending",
+        "scheduled_datetime": "2015-12-31T00:00:00+00:00",
+        "played_at": "2015-12-31T00:00:00+00:00",
+        "depth": 2,
+        "branch": "lb",
+        "opponents": [
+          {
+            "number": 1,
+            "result": "win",
+            "rank": 3,
+            "forfeit": false,
+            "score": 15,
+            "source_type": "winner",
+            "source_node_id": "618946514654565656",
+            "participant": {
+              "id": "375143143408309123",
+              "name": "Northmen",
+              "custom_fields": {}
+            }
+          },
+          {
+            "number": 1,
+            "result": "win",
+            "rank": 3,
+            "forfeit": false,
+            "score": 15,
+            "source_type": "winner",
+            "source_node_id": "618946514654565656",
+            "participant": {
+              "id": "375143143408309123",
+              "name": "Northmen",
+              "custom_fields": {}
+            }
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "stage_id": {
+          "type": "string"
+        },
+        "group_id": {
+          "type": "string"
+        },
+        "round_id": {
+          "type": "string"
+        },
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "scheduled_datetime": {
+          "type": "string"
+        },
+        "played_at": {
+          "type": "string"
+        },
+        "depth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "opponents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Opponent"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "stage_id",
+        "group_id",
+        "round_id",
+        "number",
+        "type",
+        "status",
+        "scheduled_datetime",
+        "played_at",
+        "depth",
+        "branch",
+        "opponents"
+      ]
+    },
+    "Opponent": {
+      "title": "Opponent",
+      "example": {
+        "number": 1,
+        "result": "win",
+        "rank": 3,
+        "forfeit": false,
+        "score": 15,
+        "source_type": "winner",
+        "source_node_id": "618946514654565656",
+        "participant": {
+          "id": "375143143408309123",
+          "name": "Northmen",
+          "custom_fields": {}
+        }
+      },
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "result": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "forfeit": {
+          "type": "boolean"
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "source_type": {
+          "type": "string"
+        },
+        "source_node_id": {
+          "type": "string"
+        },
+        "participant": {
+          "$ref": "#/definitions/Participant"
+        }
+      },
+      "required": [
+        "number",
+        "result",
+        "rank",
+        "forfeit",
+        "score",
+        "source_type",
+        "source_node_id",
+        "participant"
+      ]
+    },
+    "Participant": {
+      "title": "Participant",
+      "example": {
+        "id": "375143143408309123",
+        "name": "Northmen",
+        "custom_fields": {}
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "custom_fields": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "custom_fields"
+      ]
+    },
+    "Participantsretrieved.": {
+      "title": "Participantsretrieved.",
+      "example": {
+        "id": "375143143408309123",
+        "name": "Northmen",
+        "custom_fields": {}
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "custom_fields": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "custom_fields"
+      ]
+    },
+    "Createanewmatchreportinamatch.Request": {
+      "title": "Createanewmatchreportinamatch.Request",
+      "example": {
+        "participant_id": "<string>",
+        "type": "<string>",
+        "report": "<object>",
+        "note": "Lo",
+        "user_id": "deserunt cupidatat",
+        "custom_user_identifier": "eni"
+      },
+      "type": "object",
+      "properties": {
+        "participant_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "report": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "custom_user_identifier": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "participant_id",
+        "type",
+        "report",
+        "note",
+        "user_id",
+        "custom_user_identifier"
+      ]
+    },
+    "Success": {
+      "title": "Success",
+      "example": {
+        "closed": false,
+        "closed_at": "2015-12-31T00:00:00+00:00",
+        "closed_author_id": "513743143408302391",
+        "custom_user_identifier": "acme:account:1234",
+        "id": "168954615761461654",
+        "note": "A note on\ntwo lines\n",
+        "participant_id": "375143143408309123",
+        "report": {
+          "opponents": [
+            {
+              "value": "<Error: Too many levels of nesting to fake this schema>"
+            },
+            {
+              "value": "<Error: Too many levels of nesting to fake this schema>"
+            }
+          ]
+        },
+        "type": "report",
+        "user_id": "513743143408302391"
+      },
+      "type": "object",
+      "properties": {
+        "closed": {
+          "type": "boolean"
+        },
+        "closed_at": {
+          "type": "string"
+        },
+        "closed_author_id": {
+          "type": "string"
+        },
+        "custom_user_identifier": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "participant_id": {
+          "type": "string"
+        },
+        "report": {
+          "$ref": "#/definitions/Report"
+        },
+        "type": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "closed",
+        "closed_at",
+        "closed_author_id",
+        "custom_user_identifier",
+        "id",
+        "note",
+        "participant_id",
+        "report",
+        "type",
+        "user_id"
+      ]
+    },
+    "Report": {
+      "title": "Report",
+      "example": {
+        "opponents": [
+          {
+            "value": "<Error: Too many levels of nesting to fake this schema>"
+          },
+          {
+            "value": "<Error: Too many levels of nesting to fake this schema>"
+          }
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "opponents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Opponent1"
+          }
+        }
+      },
+      "required": [
+        "opponents"
+      ]
+    },
+    "Opponent1": {
+      "title": "Opponent1",
+      "example": {
+        "value": "<Error: Too many levels of nesting to fake this schema>"
+      },
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Participantretrieved.": {
+      "title": "Participantretrieved.",
+      "example": {
+        "id": "375143143408309123",
+        "name": "Northmen",
+        "custom_fields": {}
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "custom_fields": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "custom_fields"
+      ]
+    },
+    "ClaimprizeRequest": {
+      "title": "ClaimprizeRequest",
+      "example": {
+        "awardedPrizeIds": [
+          "78793fda-9f1b-11e7-abc4-cec278b6b50a",
+          "787943fe-9f1b-11e7-abc4-cec278b6b50a"
+        ]
+      },
+      "type": "object",
+      "properties": {
+        "awardedPrizeIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "awardedPrizeIds"
+      ]
+    }
+  },
+  "security": [
+    {
+      "Api-Key": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Misc",
+      "description": ""
+    }
+  ]
+}
